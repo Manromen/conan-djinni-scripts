@@ -21,7 +21,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
       with:
-        submodules: true
+        submodules: recursive
         ref: ${{ github.sha }}
     - name: install scala
       run: ${GITHUB_WORKSPACE}/.github/scripts/scala-sbt-setup.sh
@@ -42,7 +42,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
       with:
-        submodules: true
+        submodules: recursive
         ref: ${{ github.sha }}
     - name: fetch all tags and all history for all tags and branches
       run: |
@@ -71,7 +71,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
       with:
-        submodules: true
+        submodules: recursive
         ref: ${{ github.sha }}
     - name: fetch all tags and all history for all tags and branches
       run: |
@@ -100,7 +100,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
       with:
-        submodules: true
+        submodules: recursive
         ref: ${{ github.sha }}
     - name: fetch all tags and all history for all tags and branches
       run: |
