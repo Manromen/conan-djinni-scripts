@@ -7,9 +7,10 @@ env:
   CONAN_USER: rgpaul
   CONAN_CHANNEL: stable
 
-on:
-  create:
-    ref_type: tag
+on: 
+  push:
+    branches:
+      - master
 
 jobs:
 
@@ -42,12 +43,16 @@ jobs:
       with:
         submodules: true
         ref: ${{ github.sha }}
+    - name: fetch all tags and all history for all tags and branches
+      run: |
+        git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+        git fetch --prune --unshallow
     - uses: actions/download-artifact@master
       with:
         name: djinni_binary
         path: bin
-    - name: get version from tag
-      run: echo ::set-env name=LIBRARY_VERSION::$(echo ${GITHUB_REF:10})
+    - name: get version from tags
+      run: echo ::set-env name=LIBRARY_VERSION::$(git describe --abbrev=0 --tags)
     - name: install and setup conan
       run: ${GITHUB_WORKSPACE}/.github/scripts/conan-setup.sh
     - name: create conan packages
@@ -66,12 +71,16 @@ jobs:
       with:
         submodules: true
         ref: ${{ github.sha }}
+    - name: fetch all tags and all history for all tags and branches
+      run: |
+        git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+        git fetch --prune --unshallow
     - uses: actions/download-artifact@master
       with:
         name: djinni_binary
         path: bin
-    - name: get version from tag
-      run: echo ::set-env name=LIBRARY_VERSION::$(echo ${GITHUB_REF:10})
+    - name: get version from tags
+      run: echo ::set-env name=LIBRARY_VERSION::$(git describe --abbrev=0 --tags)
     - name: install and setup conan
       run: ${GITHUB_WORKSPACE}/.github/scripts/conan-setup.sh
     - name: create conan packages
@@ -90,12 +99,16 @@ jobs:
       with:
         submodules: true
         ref: ${{ github.sha }}
+    - name: fetch all tags and all history for all tags and branches
+      run: |
+        git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+        git fetch --prune --unshallow
     - uses: actions/download-artifact@master
       with:
         name: djinni_binary
         path: bin
-    - name: get version from tag
-      run: echo ::set-env name=LIBRARY_VERSION::$(echo ${GITHUB_REF:10})
+    - name: get version from tags
+      run: echo ::set-env name=LIBRARY_VERSION::$(git describe --abbrev=0 --tags)
     - name: install and setup conan
       run: ${GITHUB_WORKSPACE}/.github/scripts/conan-setup.sh
     - name: create conan packages
@@ -114,12 +127,16 @@ jobs:
       with:
         submodules: true
         ref: ${{ github.sha }}
+    - name: fetch all tags and all history for all tags and branches
+      run: |
+        git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+        git fetch --prune --unshallow
     - uses: actions/download-artifact@master
       with:
         name: djinni_binary
         path: bin
-    - name: get version from tag
-      run: echo ::set-env name=LIBRARY_VERSION::$(echo ${GITHUB_REF:10})
+    - name: get version from tags
+      run: echo ::set-env name=LIBRARY_VERSION::$(git describe --abbrev=0 --tags)
     - name: install and setup conan
       run: ${GITHUB_WORKSPACE}/.github/scripts/conan-setup.sh
     - name: create conan packages
@@ -138,12 +155,16 @@ jobs:
       with:
         submodules: true
         ref: ${{ github.sha }}
+    - name: fetch all tags and all history for all tags and branches
+      run: |
+        git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+        git fetch --prune --unshallow
     - uses: actions/download-artifact@master
       with:
         name: djinni_binary
         path: bin
-    - name: get version from tag
-      run: echo ::set-env name=LIBRARY_VERSION::$(echo ${GITHUB_REF:10})
+    - name: get version from tags
+      run: echo ::set-env name=LIBRARY_VERSION::$(git describe --abbrev=0 --tags)
     - name: install and setup conan
       run: ${GITHUB_WORKSPACE}/.github/scripts/conan-setup.sh
     - name: create conan packages
@@ -162,12 +183,16 @@ jobs:
       with:
         submodules: true
         ref: ${{ github.sha }}
+    - name: fetch all tags and all history for all tags and branches
+      run: |
+        git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+        git fetch --prune --unshallow
     - uses: actions/download-artifact@master
       with:
         name: djinni_binary
         path: bin
-    - name: get version from tag
-      run: echo ::set-env name=LIBRARY_VERSION::$(echo ${GITHUB_REF:10})
+    - name: get version from tags
+      run: echo ::set-env name=LIBRARY_VERSION::$(git describe --abbrev=0 --tags)
     - name: install and setup conan
       run: ${GITHUB_WORKSPACE}/.github/scripts/conan-setup.sh
     - name: create conan packages
@@ -186,12 +211,16 @@ jobs:
       with:
         submodules: true
         ref: ${{ github.sha }}
+    - name: fetch all tags and all history for all tags and branches
+      run: |
+        git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+        git fetch --prune --unshallow
     - uses: actions/download-artifact@master
       with:
         name: djinni_binary
         path: bin
-    - name: get version from tag
-      run: echo ::set-env name=LIBRARY_VERSION::$(echo ${GITHUB_REF:10})
+    - name: get version from tags
+      run: echo ::set-env name=LIBRARY_VERSION::$(git describe --abbrev=0 --tags)
     - name: install and setup conan
       run: ${GITHUB_WORKSPACE}/.github/scripts/conan-setup.sh
     - name: create conan packages
@@ -210,12 +239,16 @@ jobs:
       with:
         submodules: true
         ref: ${{ github.sha }}
+    - name: fetch all tags and all history for all tags and branches
+      run: |
+        git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+        git fetch --prune --unshallow
     - uses: actions/download-artifact@master
       with:
         name: djinni_binary
         path: bin
-    - name: get version from tag
-      run: echo ::set-env name=LIBRARY_VERSION::$(echo ${GITHUB_REF:10})
+    - name: get version from tags
+      run: echo ::set-env name=LIBRARY_VERSION::$(git describe --abbrev=0 --tags)
     - name: install and setup conan
       run: ${GITHUB_WORKSPACE}/.github/scripts/conan-setup.sh
     - name: create conan packages
