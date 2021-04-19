@@ -13,7 +13,7 @@ class DjinniConan(ConanFile):
     description = "A tool for generating cross-language type declarations and interface bindings."
     url = "https://github.com/RGPaul/conan-djinni-scripts"
     license = "Apache-2.0"
-    exports_sources = "cmake-modules/*", "djinni/*", "bin/djinni.jar"
+    exports_sources = "djinni/*", "bin/djinni.jar"
 
     # compile using cmake
     def build(self):
@@ -33,22 +33,19 @@ class DjinniConan(ConanFile):
             cmake.definitions["DJINNI_WITH_JNI"] = "ON"
 
         if self.settings.os == "iOS":
-            ios_toolchain = "cmake-modules/Toolchains/ios.toolchain.cmake"
-            cmake.definitions["CMAKE_TOOLCHAIN_FILE"] = ios_toolchain
+            cmake.definitions["CMAKE_SYSTEM_NAME"] = "iOS"
+            cmake.definitions["DEPLOYMENT_TARGET"] = "10.0"
+            cmake.definitions["CMAKE_OSX_DEPLOYMENT_TARGET"] = "10.0"
+            cmake.definitions["CMAKE_XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH"] = "NO"
+            cmake.definitions["CMAKE_IOS_INSTALL_COMBINED"] = "YES"
+
             cmake.definitions["DJINNI_WITH_OBJC"] = "ON"
 
             # define all architectures for ios fat library
             if "arm" in self.settings.arch:
-                cmake.definitions["ARCHS"] = "armv7;armv7s;arm64;arm64e"
+                cmake.definitions["CMAKE_OSX_ARCHITECTURES"] = "armv7;armv7s;arm64;arm64e"
             else:
-                cmake.definitions["ARCHS"] = tools.to_apple_arch(self.settings.arch)
-
-            if self.settings.arch == "x86":
-                cmake.definitions["PLATFORM"] = "SIMULATOR"
-            elif self.settings.arch == "x86_64":
-                cmake.definitions["PLATFORM"] = "SIMULATOR64"
-            else:
-                cmake.definitions["PLATFORM"] = "OS"
+                cmake.definitions["CMAKE_OSX_ARCHITECTURES"] = tools.to_apple_arch(self.settings.arch)
 
         if self.options.shared == False:
             cmake.definitions["DJINNI_STATIC_LIB"] = "ON"
